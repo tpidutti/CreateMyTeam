@@ -55,7 +55,7 @@ const makeHTML = () =>
 //       message: "What is your name?",
 //     },
 //     {
-//       type: "input",
+//       type: "number",
 //       name: "employeeID",
 //       message: "What is your employee ID number?",
 //     },
@@ -84,7 +84,7 @@ function createManager(){
       message: "What is your name?",
     },
     {
-      type: "input",
+      type: "number",
       name: "managerID",
       message: "What is your employee ID number?",
     },
@@ -121,7 +121,7 @@ function createEngineer(){
         message: "What is your name?",
       },
       {
-        type: "input",
+        type: "number",
         name: "engineerID",
         message: "What is your employee ID number?",
       },
@@ -158,7 +158,7 @@ function createIntern(){
       message: "What is your name?",
     },
     {
-      type: "input",
+      type: "number",
       name: "internID",
       message: "What is your employee ID number?",
     },
