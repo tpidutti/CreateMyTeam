@@ -28,15 +28,15 @@ const makeHTML = () =>
     <div class="card" style="width: 18rem;">
         <div class= "card-header">
             <h5 class="card-title text-center">${employeeName}</h5>
-            <h6 class="card-subtitle mb-2  text-center text-muted">${position}</h6>
+            <h6 class="card-subtitle mb-2  text-center text-muted">${jobTitle}</h6>
         </div>
         <div class="card-body">
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">Employee ID: ${employeeId}</li>
-                <li class="list-group-item">Email: ${email}</li>
-                <li class="list-group-item">Office Number: ${officeNum}</li>
-                <li class="list-group-item">GitHub: ${username}</li>
-                <li class="list-group-item">School: ${school}</li>
+                <li class="list-group-item">Employee ID: ${employeeID}</li>
+                <li class="list-group-item">Email: ${employeeEmail}</li>
+                <li class="list-group-item">Office Number: ${managerOffice}</li>
+                // <li class="list-group-item">GitHub: ${engineerGithub}</li>
+                // <li class="list-group-item">School: ${internSchool}</li>
               </ul>
           <a href="#" class="card-link">link</a>
 
@@ -45,6 +45,187 @@ const makeHTML = () =>
 </body>
 </html>`;
 
+
+// function createEmployee(){
+//   inquirer
+// .prompt([
+//   {
+//       type: "input",
+//       name: "employeeName",
+//       message: "What is your name?",
+//     },
+//     {
+//       type: "input",
+//       name: "employeeID",
+//       message: "What is your employee ID number?",
+//     },
+//     {
+//       type: "input",
+//       name: "employeeEmail",
+//       message: "What is your email address?",
+//     },
+//   ])
+//   .then(response => {
+//       let employee = new Employee(
+//           response.employeeName,
+//           response.employeeID,
+//           response.employeeEmail,
+//           )
+//           members.push(employee);
+//           createTeam()
+//   })
+
+function createManager(){
+  inquirer
+.prompt([
+  {
+      type: "input",
+      name: "managerName",
+      message: "What is your name?",
+    },
+    {
+      type: "input",
+      name: "managerID",
+      message: "What is your employee ID number?",
+    },
+    {
+      type: "input",
+      name: "managerEmail",
+      message: "What is your email address?",
+    },
+    {
+      type: "input",
+      name: "managerOffice",
+      message: "What is your office number?",
+    },
+  ])
+  .then(response => {
+      let manager = new Manager(
+          response.managerName,
+          response.managerID,
+          response.managerEmail,
+          response.managerOffice
+          )
+          members.push(manager);
+          createTeam()
+  })
+  
+}
+
+function createEngineer(){
+    inquirer
+  .prompt([
+    {
+        type: "input",
+        name: "engineerName",
+        message: "What is your name?",
+      },
+      {
+        type: "input",
+        name: "engineerID",
+        message: "What is your employee ID number?",
+      },
+      {
+        type: "input",
+        name: "engineerEmail",
+        message: "What is your email address?",
+      },
+      {
+        type: "input",
+        name: "engineerGithub",
+        choices: "What is your GitHub username?",
+      },
+    ])
+    .then(response => {
+        let engineer = new Engineer(
+            response.engineerName,
+            response.engineerID,
+            response.engineerEmail,
+            response.engineerGithub
+            )
+            members.push(engineer);
+            createTeam()
+    })
+    
+}
+
+function createIntern(){
+  inquirer
+.prompt([
+  {
+      type: "input",
+      name: "internName",
+      message: "What is your name?",
+    },
+    {
+      type: "input",
+      name: "internID",
+      message: "What is your employee ID number?",
+    },
+    {
+      type: "input",
+      name: "internEmail",
+      message: "What is your email address?",
+    },
+    {
+      type: "input",
+      name: "internSchool",
+      message: "What school do you attend?",
+    },
+  ])
+  .then(response => {
+      let intern = new Intern(
+          response.internName,
+          response.internID,
+          response.internEmail,
+          response.internSchool
+          )
+          members.push(intern);
+          createTeam()
+  })
+  
+}
+
+
+function createTeam() {
+  inquirer
+    .prompt([
+      {
+        type: "list",
+        name: "chooseMember",
+        choices: ["Engineer", "Manager", "Intern", "I'm done building my team."],
+      },
+    ])
+    .then((response) => {
+      switch (response.chooseMember) {
+        case "Engineer":
+          createEngineer();
+          break;
+        case "Manager":
+          createManager();
+          break;
+        case "Intern":
+          createIntern();
+          break;
+        default:
+        buildATeam();
+      }
+    });
+}
+
+function buildATeam(){
+  const pageContent = makeHTML(members);
+  // create index.html file with user input to questions and action stated in makeHTML, if errors state and if created state
+  fs.writeFile("index.html", pageContent, (err) =>
+    err ? console.log(err) : console.log("An index.html file was created.")
+  );
+}
+
+createTeam()
+
+
+  
+// }
 // inquirer
 //   .prompt([
 //     // questions for all employees
@@ -94,76 +275,3 @@ const makeHTML = () =>
 //       err ? console.log(err) : console.log("An index.html file was created.")
 //     );
 //   });
-
-function createEngineer(){
-    inquirer
-  .prompt([
-    {
-        type: "input",
-        name: "engineerName",
-        message: "What is your name?",
-      },
-      {
-        type: "input",
-        name: "engineerID",
-        message: "What is your employee ID number?",
-      },
-      {
-        type: "input",
-        name: "engineerEmail",
-        message: "What is your email address?",
-      },
-      {
-        type: "input",
-        name: "engineerGithub",
-        choices: "What is your GitHub username?",
-      },
-    ])
-    .then(response => {
-        let engineer = new Engineer(
-            response.engineerName,
-            response.engineerID,
-            response.engineerEmail,
-            response.engineerGithub
-            )
-            members.push(engineer);
-            createTeam()
-    })
-    
-}
-
-function buildATeam(){
-    const pageContent = makeHTML(members);
-    // create index.html file with user input to questions and action stated in makeHTML, if errors state and if created state
-    fs.writeFile("index.html", pageContent, (err) =>
-      err ? console.log(err) : console.log("An index.html file was created.")
-    );
-}
-
-function createTeam() {
-  inquirer
-    .prompt([
-      {
-        type: "list",
-        name: "chooseMember",
-        choices: ["Engineer", "Manager", "Intern", "I'm done."],
-      },
-    ])
-    .then((response) => {
-      switch (response.chooseMember) {
-        case "Engineer":
-          createEngineer();
-          break;
-        case "Manager":
-          createManager();
-          break;
-        case "Intern":
-          createIntern();
-          break;
-        default:
-        buildATeam();
-      }
-    });
-}
-
-createTeam()
