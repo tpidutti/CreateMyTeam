@@ -20,7 +20,9 @@
   },
   "homepage": "https://github.com/tpidutti/CreateMyTeam#readme",
   "dependencies": {
-    "inquirer": "^8.0.0",
+    "inquirer": "^8.0.0"
+  },
+  "devDependencies": {
     "jest": "^26.6.3"
   }
 }
