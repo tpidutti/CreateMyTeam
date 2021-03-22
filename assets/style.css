@@ -1,0 +1,12 @@
+.card {
+    margin: 30px;
+}
+
+.card-header {
+    background-color: rgb(147, 178, 233);
+}
+
+#top {
+    background-color: cadetblue;
+    color: white;
+}
