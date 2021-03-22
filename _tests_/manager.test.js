@@ -1,1 +1,2 @@
-const jest = require("jest");
+const Manager = require("./lib/manager");
+
