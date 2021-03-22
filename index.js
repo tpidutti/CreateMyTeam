@@ -7,9 +7,18 @@ const Engineer = require("./lib/engineer.js");
 const Intern = require("./lib/intern.js");
 const Manager = require("./lib/manager.js");
 
+//const members = [Engineer, Intern, Manager];
 const members = [];
 
-const makeHTML = (response) =>
+const makeHTML = (response) => {
+  // var test = 10;
+  //dynamicaly create our html
+  // have our standard html
+  // add each unique card to that html
+
+  let entireHTML = beginHTML + cardHTML;
+
+  const beginHTML = 
   `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,7 +30,12 @@ const makeHTML = (response) =>
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
-    <div class= "p-5 rounded-lg m-3" id="top">
+${cardHTML}
+</body>
+</html>`;
+
+  const cardHTML = 
+  `<div class= "p-5 rounded-lg m-3" id="top">
         <h1 class="display-4 text-center">My Team</h1>
     </div>
     <div class="card" style="width: 18rem;">
@@ -31,19 +45,19 @@ const makeHTML = (response) =>
         </div>
         <div class="card-body">
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">Employee ID: ${response.ID}</li>
-                <li class="list-group-item">Email: ${response.Email}</li>
-                <li class="list-group-item">Office Number: ${response.managerOffice}</li>
-                <li class="list-group-item">GitHub: ${response.engineerGithub}</li>
-                <li class="list-group-item">School: ${response.internSchool}</li>
+                <li class="list-group-item">Employee ID: ${response.id}</li>
+                <li class="list-group-item">Email: ${response.email}</li>
+                <li class="list-group-item">Office Number: ${response.office}</li>
+                <li class="list-group-item">GitHub: ${response.github}</li>
+                <li class="list-group-item">School: ${response.school}</li>
               </ul>
           <a href="#" class="card-link">link</a>
 
         </div>
-      </div>
-</body>
-</html>`;
+      </div>`;
 
+  return entireHTML;
+};
 
 function createManager() {
   inquirer
@@ -64,7 +78,7 @@ function createManager() {
         message: "What is your email address?",
       },
       {
-        type: "input",
+        type: "number",
         name: "managerOffice",
         message: "What is your office number?",
       },
@@ -185,7 +199,8 @@ function createTeam() {
 }
 
 function buildATeam() {
-  const pageContent = makeHTML(members);
+  console.log(members);
+  const pageContent = makeHTML(members[0]);
   // create index.html file with user input to questions and action stated in makeHTML, if errors state and if created state
   fs.writeFile("index.html", pageContent, (err) =>
     err ? console.log(err) : console.log("An index.html file was created.")
@@ -193,32 +208,3 @@ function buildATeam() {
 }
 
 createTeam();
-
-// function createEmployee(){
-//   inquirer
-// .prompt([
-//   {
-//       type: "input",
-//       name: "employeeName",
-//       message: "What is your name?",
-//     },
-//     {
-//       type: "number",
-//       name: "employeeID",
-//       message: "What is your employee ID number?",
-//     },
-//     {
-//       type: "input",
-//       name: "employeeEmail",
-//       message: "What is your email address?",
-//     },
-//   ])
-//   .then(response => {
-//       let employee = new Employee(
-//           response.employeeName,
-//           response.employeeID,
-//           response.employeeEmail,
-//           )
-//           members.push(employee);
-//           createTeam()
-//   })
