@@ -1,8 +1,6 @@
-// use of dependencies that were added and file system
+// use of dependencies that were added, file system, and created classes
 const inquirer = require("inquirer");
-const jest = require("jest");
 const fs = require("fs");
-
 const Engineer = require("./lib/engineer.js");
 const Intern = require("./lib/intern.js");
 const Manager = require("./lib/manager.js");
@@ -11,13 +9,65 @@ const Manager = require("./lib/manager.js");
 const members = [];
 
 const makeHTML = (response) => {
-  // var test = 10;
   //dynamicaly create our html
   // have our standard html
   // add each unique card to that html
 
-  let entireHTML = beginHTML + cardHTML;
+  let entireHTML = beginHTML +  
 
+  if(members === Manager){
+card =
+   ` <div class="card" style="width: 18rem;">
+                <div class= "card-header">
+                    <h5 class="card-title text-center">${name}</h5>
+                    <h6 class="card-subtitle mb-2  text-center">Manager</h6>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Employee ID: ${id}</li>
+                        <li class="list-group-item">Email: <a href=mailto:${email}</a></li>
+                        <li class="list-group-item">Office Number: ${officeNum}</li>
+                      </ul>  
+                  </div>
+              </div>`;
+  }else if(members === Engineer){
+// one of the cards, to display the manager info on the html
+card =
+   ` <div class="card" style="width: 18rem;">
+                <div class= "card-header">
+                    <h5 class="card-title text-center">${name}</h5>
+                    <h6 class="card-subtitle mb-2  text-center">Engineer</h6>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Employee ID: ${id}</li>
+                        <li class="list-group-item">Email: <a href=mailto:${email}</a></li>
+                        <li class="list-group-item">Github: <a href=${github}</a></li>
+                      </ul>  
+                  </div>
+              </div>`;
+  }else(members === Intern){
+    // one of the cards, to display the manager info on the html
+card =
+` <div class="card" style="width: 18rem;">
+             <div class= "card-header">
+                 <h5 class="card-title text-center">${name}</h5>
+                 <h6 class="card-subtitle mb-2  text-center">Intern</h6>
+             </div>
+             <div class="card-body">
+                 <ul class="list-group list-group-flush">
+                     <li class="list-group-item">Employee ID: ${id}</li>
+                     <li class="list-group-item">Email: <a href=mailto:${email}</a></li>
+                     <li class="list-group-item">School: ${school}</li>
+                   </ul>  
+               </div>
+           </div>`;
+  }  
+  fs.appendFile ("???", card (err) => err ? console.log(err) : console.log("Card added to body of HTML."));
+
+  + endHTML   
+
+  // the begining piece of the html that will be added to the card and the end piece to create the whole document
   const beginHTML = 
   `<!DOCTYPE html>
 <html lang="en">
@@ -30,35 +80,21 @@ const makeHTML = (response) => {
 <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
-${cardHTML}
-</body>
+  <div class= "p-5 rounded-lg m-3" id="top">
+        <h1 class="display-4 text-center">My Team</h1>
+        </div>`;
+
+
+// the close of the html that will be added to the beginning and middle
+const endHTML =
+`</body>
 </html>`;
 
-  const cardHTML = 
-  `<div class= "p-5 rounded-lg m-3" id="top">
-        <h1 class="display-4 text-center">My Team</h1>
-    </div>
-    <div class="card" style="width: 18rem;">
-        <div class= "card-header">
-            <h5 class="card-title text-center">${response.name}</h5>
-            <h6 class="card-subtitle mb-2  text-center">${response.chooseMember}</h6>
-        </div>
-        <div class="card-body">
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">Employee ID: ${response.id}</li>
-                <li class="list-group-item">Email: ${response.email}</li>
-                <li class="list-group-item">Office Number: ${response.office}</li>
-                <li class="list-group-item">GitHub: ${response.github}</li>
-                <li class="list-group-item">School: ${response.school}</li>
-              </ul>
-          <a href="#" class="card-link">link</a>
-
-        </div>
-      </div>`;
-
+// puts the pieces of the html together as a whole document and displays it
   return entireHTML;
 };
 
+// user asked to give info on characteristics of manager and this function take that info, creates a unique manager with it and puts that in the members array
 function createManager() {
   inquirer
     .prompt([
@@ -94,7 +130,7 @@ function createManager() {
       createTeam();
     });
 }
-
+// user asked to give info on characteristics of engineer and this function take that info, creates a unique engineer with it and puts that in the members array
 function createEngineer() {
   inquirer
     .prompt([
@@ -130,7 +166,7 @@ function createEngineer() {
       createTeam();
     });
 }
-
+// user asked to give info on characteristics of intern and this function take that info, creates a unique intern with it and puts that in the members array
 function createIntern() {
   inquirer
     .prompt([
@@ -166,19 +202,14 @@ function createIntern() {
       createTeam();
     });
 }
-
+// user prompted to decide which type of emplyee to create
 function createTeam() {
   inquirer
     .prompt([
       {
         type: "list",
         name: "chooseMember",
-        choices: [
-          "Engineer",
-          "Manager",
-          "Intern",
-          "I'm done building my team.",
-        ],
+        choices: ["Engineer", "Manager", "Intern", "I'm done building my team.",],
       },
     ])
     .then((response) => {
@@ -197,14 +228,14 @@ function createTeam() {
       }
     });
 }
-
+// members array used to create html document
 function buildATeam() {
   console.log(members);
-  const pageContent = makeHTML(members[0]);
+  const pageContent = makeHTML(members);
   // create index.html file with user input to questions and action stated in makeHTML, if errors state and if created state
   fs.writeFile("index.html", pageContent, (err) =>
     err ? console.log(err) : console.log("An index.html file was created.")
   );
 }
-
+// call on function to assemble the team members based on which ones the user picked and using the info provided in each type of employees create function
 createTeam();

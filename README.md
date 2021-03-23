@@ -36,6 +36,7 @@ npm i can be used to install dependencies such as inquirer for the questions and
 
   ### Tests
   
+  Test with jest for employee, engineer, intern and manager; determining that each object has the required traits.
 
   ## Questions
   Please contact me, Theresa, with any questions you might have about this project.  You can reach me at bountravel@hotmail.com or view more of my work at GitHub, [tpidutti](https://github.com/tpidutti).
