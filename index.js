@@ -7,23 +7,23 @@ const Manager = require("./lib/manager.js");
 
 const members = [];
 
-const createHTML = (response) => {
+const makeHTML = (response) => {
   //this for loop builds our cards
   for(let i = 0; i < response.length; i++){
     var info = response[i].getRole();
 
     if (info === "Manager"){
-      //creat manager html...
+      //creates manager html
       ` <div class="card" style="width: 18rem;">
                        <div class= "card-header">
-                           <h5 class="card-title text-center">${name}</h5>
+                           <h5 class="card-title text-center">${this.name}</h5>
                            <h6 class="card-subtitle mb-2  text-center">Manager</h6>
                        </div>
                        <div class="card-body">
                           <ul class="list-group list-group-flush">
-                              <li class="list-group-item">Employee ID: ${id}</li>
-                              <li class="list-group-item">Email: <a href=mailto:${email}</a></li>
-                              <li class="list-group-item">Office Number: ${officeNum}</li>
+                              <li class="list-group-item">Employee ID: ${this.id}</li>
+                              <li class="list-group-item">Email: <a href=mailto:${this.email}</a></li>
+                              <li class="list-group-item">Office Number: ${this.officeNum}</li>
                            </ul>  
                        </div>
                    </div>`;
@@ -31,14 +31,14 @@ const createHTML = (response) => {
       // creates engineer html
          ` <div class="card" style="width: 18rem;">
                       <div class= "card-header">
-                          <h5 class="card-title text-center">${name}</h5>
+                          <h5 class="card-title text-center">${this.name}</h5>
                           <h6 class="card-subtitle mb-2  text-center">Engineer</h6>
                       </div>
                       <div class="card-body">
                           <ul class="list-group list-group-flush">
-                              <li class="list-group-item">Employee ID: ${id}</li>
-                              <li class="list-group-item">Email: <a href=mailto:${email}</a></li>
-                              <li class="list-group-item">Github: <a href=${github}</a></li>
+                              <li class="list-group-item">Employee ID: ${this.id}</li>
+                              <li class="list-group-item">Email: <a href=mailto:${this.email}</a></li>
+                              <li class="list-group-item">Github: <a href=${this.github}</a></li>
                             </ul>  
                         </div>
                     </div>`;
@@ -46,22 +46,20 @@ const createHTML = (response) => {
           // creates intern html
       ` <div class="card" style="width: 18rem;">
                    <div class= "card-header">
-                       <h5 class="card-title text-center">${name}</h5>
+                       <h5 class="card-title text-center">${this.name}</h5>
                        <h6 class="card-subtitle mb-2  text-center">Intern</h6>
                    </div>
                    <div class="card-body">
                        <ul class="list-group list-group-flush">
-                           <li class="list-group-item">Employee ID: ${id}</li>
-                           <li class="list-group-item">Email: <a href=mailto:${email}</a></li>
-                           <li class="list-group-item">School: ${school}</li>
+                           <li class="list-group-item">Employee ID: ${this.id}</li>
+                           <li class="list-group-item">Email: <a href=mailto:${this.email}</a></li>
+                           <li class="list-group-item">School: ${this.school}</li>
                          </ul>  
                      </div>
                  </div>`;
 
                   }; 
   
-
-
   // the begining piece of the html that will be added to the card and the end piece to create the whole document
   const beginHTML = 
   `<!DOCTYPE html>
@@ -85,9 +83,9 @@ const endHTML =
 `</body>
 </html>`;
 
-let entireHTML = {...beginHTML, ...createHTML, ...endHTML}; 
+let entireHTML = {...beginHTML, ...info, ...endHTML}; 
 
-  fs.writeFile ("index.html", entireHTML, (err) => err ? console.log(err) : console.log("Document added to  HTML.")); 
+  fs.appendFile("index.html", entireHTML, (err) => err ? console.log(err) : console.log("Document added to  HTML.")); 
 
 // puts the pieces of the html together as a whole document and displays it
   return entireHTML;
@@ -231,7 +229,7 @@ function createTeam() {
 // members array used to create html document
 function buildATeam() {
    const pageContent = makeHTML(members);
-  // // create index.html file with user input to questions and action stated in makeHTML, if errors state and if created state
+// create index.html file with user input to questions and action stated in makeHTML, if errors state and if created state
   fs.writeFile("index.html", pageContent, (err) => err ? console.log(err) : console.log("An index.html file was created.")
   );
 }
