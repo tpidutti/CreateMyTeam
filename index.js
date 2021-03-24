@@ -59,7 +59,8 @@ const makeHTML = (response) => {
                  </div>`;
 
                   }; 
-  
+fs.appendFile("index.html", info, (err) => err ? console.log(err) : console.log("Cards added to HTML.")); 
+
   // the begining piece of the html that will be added to the card and the end piece to create the whole document
   const beginHTML = 
   `<!DOCTYPE html>
@@ -76,19 +77,20 @@ const makeHTML = (response) => {
   <div class= "p-5 rounded-lg m-3" id="top">
         <h1 class="display-4 text-center">My Team</h1>
         </div>`;
-
+fs.appendFile("index.html", beginHTML, (err) => err ? console.log(err) : console.log("Start of HTML added.")); 
 
 // the close of the html that will be added to the beginning and middle
 const endHTML =
 `</body>
 </html>`;
+fs.appendFile("index.html", endHTML, (err)=> err ? console.log(err) : console.log("End of HTML added."));
 
-let entireHTML = {...beginHTML, ...info, ...endHTML}; 
 
-  fs.appendFile("index.html", entireHTML, (err) => err ? console.log(err) : console.log("Document added to  HTML.")); 
+// let entireHTML = {...beginHTML, ...info, ...endHTML}; 
+
 
 // puts the pieces of the html together as a whole document and displays it
-  return entireHTML;
+  // return entireHTML;
 };
 
 // user asked to give info on characteristics of manager and this function take that info, creates a unique manager with it and puts that in the members array
