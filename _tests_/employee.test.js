@@ -1,4 +1,4 @@
-const Employee = require("./lib/employee");
+const Employee = require("../lib/Employee");
 
 describe("Employee", () => {
   describe("StartToBuild", () => {
@@ -8,45 +8,45 @@ describe("Employee", () => {
     });
 
     it("Name attribute set in constructor", () => {
-      const name = "Name";
+      const name = "John";
       const em = new Employee(name);
       expect(em.name).toBe(name);
     });
 
     it("ID attribute set with constructor", () => {
-      const id = "idNum";
-      const em = new Employee(id);
-      expect(em.id).toBe("name", id);
+      const id = 90;
+      const em = new Employee("John", id);
+      expect(em.id).toBe(id);
     }); 
     
     it("Email attrubute set in constructor", () => {
-      const email = "emailAddress";
-      const em = new Employee(email);
-      expect(em.email).toBe("name", idNum, email);
+      const email = "bountravel@hotmail.com";
+      const em = new Employee("John", 90, email);
+      expect(em.email).toBe(email);
     });
   });
   
   describe("gets", () => {
     it ("Gets name with getName() method", () => {
-      const name = "Name";
-      const em = new Employee(name, idNum, "emailAddres");
+      const name = "John";
+      const em = new Employee(name, 90, "bountravel@hotmail.com");
       expect(em.getName()).toBe(name);
     });
 
     it ("Gets id with getId() method", () => {
-      const id = "idNum";
-      const em = new Employee("Name", id, "emailAddres");
+      const id = 90;
+      const em = new Employee("John", id, "bountravel@hotmail.com");
       expect(em.getId()).toBe(id);
     });
 
-    it ("Gets email with getEmail() method", () => {
-      const email = "emailAddres";
-      const em = new Employee("Name", idNum, email);
+    it("Gets email with getEmail() method", () => {
+      const email = "bountravel@hotmail.com";
+      const em = new Employee("John", 90, email);
       expect(em.getEmail()).toBe(email);
     });
 
     it ("Gets role with getRole() method", () => {
-      const em = new Employee("Name", idNum, "emailAddres");
+      const em = new Employee("John", 90, "bountravel@hotmail.com");
       expect(em.getRole()).toBe("Employee");
     });
   });
