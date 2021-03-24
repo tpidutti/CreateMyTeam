@@ -41,7 +41,7 @@ function renderEmployees(employees) {
     <div class="card-body">
         <ul class="list-group list-group-flush">
             <li class="list-group-item">Employee ID: ${employee.id}</li>
-            <li class="list-group-item">Email: <a href=mailto:${employee.email}</a></li>
+            <li class="list-group-item">Email: ${employee.email}</li>
             <li class="list-group-item">Office Number: ${employee.officeNum}</li>
         </ul>  
     </div>
@@ -57,8 +57,8 @@ function renderEmployees(employees) {
     <div class="card-body">
         <ul class="list-group list-group-flush">
             <li class="list-group-item">Employee ID: ${employee.id}</li>
-            <li class="list-group-item">Email: <a href=mailto:${employee.email}</a></li>
-            <li class="list-group-item">Github: <a href=${employee.github}</a></li>
+            <li class="list-group-item">Email: ${employee.email}</li>
+            <li class="list-group-item">Github: ${employee.github}</li>
         </ul>  
     </div>
 </div>`;
@@ -72,7 +72,7 @@ function renderEmployees(employees) {
         <div class="card-body">
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">Employee ID: ${employee.id}</li>
-                <li class="list-group-item">Email: <a href=mailto:${employee.email}</a></li>
+                <li class="list-group-item">Email: ${employee.email}</li>
                 <li class="list-group-item">School: ${employee.school}</li>
             </ul>  
         </div>

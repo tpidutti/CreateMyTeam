@@ -42,4 +42,4 @@ npm i can be used to install dependencies such as inquirer for the questions and
   Please contact me, Theresa, with any questions you might have about this project.  You can reach me at bountravel@hotmail.com or view more of my work at GitHub, [tpidutti](https://github.com/tpidutti).
 
   ## Video Demo of Create My Team
-  ()
+  (https://youtu.be/VMkcCIMSN20)
